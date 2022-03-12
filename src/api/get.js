@@ -1,6 +1,7 @@
 import axios from "axios";
 
-const baseUrl = "http://localhost:5000";
+const baseUrl =
+  "https://twitter-square-boat.herokuapp.com" || "http://localhost:5000";
 
 const get = async (url, params, token) => {
   try {

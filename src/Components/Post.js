@@ -32,15 +32,19 @@ const Post = (props) => {
         padding: "20px 20px",
       }}
     >
-      <Link to={`/user/${postUser._id}`}>
-        <span
-          style={{
-            fontWeight: "bold",
-          }}
-        >
-          @{username}
-        </span>
-      </Link>
+      {postUser._id === ctx.user._id ? (
+        <span>You</span>
+      ) : (
+        <Link to={`/user/${postUser._id}`}>
+          <span
+            style={{
+              fontWeight: "bold",
+            }}
+          >
+            @{postUser.name}
+          </span>
+        </Link>
+      )}
       <span style={{ fontSize: "10px" }}>{moment(postedOn).fromNow()}</span>
       <div>{message}</div>
       <div>

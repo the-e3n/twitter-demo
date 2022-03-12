@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import Link from "./Link";
+import { Link } from "react-router-dom";
 import AuthContext from "../context/auth-context";
 
 const NavBar = (props) => {
@@ -27,7 +27,7 @@ const NavBar = (props) => {
             justifyContent: "space-around",
           }}
         >
-          <Link className="brandLogo" to="/">
+          <Link className="brandLogo navLink" to="/">
             Twitter
           </Link>
           {ctx.loggedIn ? (
@@ -64,10 +64,18 @@ const NavBar = (props) => {
               </>
             ) : (
               <>
-                <Link style={{ marginRight: "5px" }} to="/register">
+                <Link
+                  className="navLink"
+                  style={{ marginRight: "5px" }}
+                  to="/register"
+                >
                   Register
                 </Link>
-                <Link style={{ marginLeft: "5px" }} to="/login">
+                <Link
+                  className="navLink"
+                  style={{ marginLeft: "5px" }}
+                  to="/login"
+                >
                   Login
                 </Link>
               </>

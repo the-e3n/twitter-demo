@@ -79,6 +79,10 @@ body {
   outline: none;
   background-color: rgba(39, 39, 39, 0.137);
 }
+.navLink {
+  color: white;
+  text-decoration: none;
+}
 
 @media only screen and (max-width: 768px) {
   body {

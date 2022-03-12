@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import api from "../api";
 import { useHistory } from "react-router";
 import Alert from "../Components/Alert";
 import { ShowToast } from "../Utilities";
+import AuthContext from "../context/auth-context";
 
 const crypto = require("crypto");
 
@@ -10,6 +11,7 @@ const LoginForm = (props) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [result, setResult] = useState("");
+  const ctx = useContext(AuthContext);
 
   const handleSubmit = async (e) => {
     if (!email || !password) {
@@ -41,7 +43,7 @@ const LoginForm = (props) => {
       }
     }
   };
-
+  if (ctx.loggedIn) return null;
   return (
     <div
       className="container p-3 border border-2"
