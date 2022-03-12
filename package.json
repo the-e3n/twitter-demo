@@ -2,7 +2,7 @@
   "name": "twitter-frontend",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://the-e3n.github.io/twitter-frontend",
+  "homepage": "https://the-e3n.github.io/",
   "dependencies": {
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^11.2.7",
