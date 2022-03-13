@@ -46,6 +46,12 @@ function App() {
       setToken("");
     }
   };
+  const reloadUser = () => {
+    if (!token) return;
+    api.get(`/api/users/get/${user._id}`, {}, token).then((res) => {
+      setUser(res.data);
+    });
+  };
 
   return (
     <AuthContext.Provider
@@ -90,7 +96,7 @@ function App() {
                 !logged ? (
                   <LoginForm onLogin={onLogin} />
                 ) : (
-                  <User following={true} />
+                  <User reloadUser={reloadUser} />
                 )
               }
             />

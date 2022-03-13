@@ -6,7 +6,7 @@ import api from "../api";
 import PostForm from "./PostForm";
 import AuthContext from "../context/auth-context";
 
-const User = () => {
+const User = ({ reloadUser }) => {
   const ctx = useContext(AuthContext);
   const [user, setUser] = useState({});
   let { followers = [] } = user;
@@ -27,6 +27,7 @@ const User = () => {
     let url = `/api/users/${followed ? "unfollow" : "follow"}/${params.userid}`;
     api.post(url, {}, {}, ctx.token).then((res) => {
       loadUser();
+      reloadUser && reloadUser();
     });
   };
   let { posts = [] } = user;
