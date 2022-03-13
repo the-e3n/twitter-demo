@@ -46,7 +46,7 @@ const LoginForm = (props) => {
   if (ctx.loggedIn) return null;
   return (
     <div
-      className="container p-3 border border-2"
+      className="container login-form p-3 border border-2"
       style={{
         width: "30vw",
         backgroundColor: "white",

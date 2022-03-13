@@ -110,4 +110,13 @@ body {
   .login-controls {
     flex-direction: column !important;
   }
+  .post-user-img {
+    display: none;
+  }
+  .login-form {
+    width: 80vw !important;
+  }
+  .signup-form {
+    width: 80vw !important;
+  }
 }

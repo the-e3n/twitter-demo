@@ -37,7 +37,7 @@ const UserSignUp = (props) => {
   };
   return (
     <div
-      className="container p-5"
+      className="container p-5 signup-form"
       style={{ width: "30vw", marginTop: "10vh", backgroundColor: "white" }}
     >
       <h1 className="text-center">Sign Up</h1>
