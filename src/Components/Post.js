@@ -63,7 +63,7 @@ const Post = (props) => {
                 fontWeight: "bold",
               }}
             >
-              @{postUser.name}
+              @{postUser.name || "username"}
             </span>
           </Link>
         )}

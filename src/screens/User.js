@@ -36,7 +36,7 @@ const User = () => {
         }
         alt="user"
       />
-      <h1>{user.name}</h1>
+      <h1>{user.name || "Loading User Name..."}</h1>
       <button
         className={`btn ${followed ? "btn-red" : "btn-blue"}`}
         onClick={onFollowChange}

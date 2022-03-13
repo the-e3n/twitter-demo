@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import api from "../api";
 import crypto from "crypto";
 import { ShowToast } from "../Utilities";
+import { stat } from "fs";
 
 const UserSignUp = (props) => {
   const [result, setResult] = useState("");
@@ -10,29 +11,41 @@ const UserSignUp = (props) => {
   const handleSubmit = async (e) => {
     let pass1 = state["password1"];
     let pass2 = state["password2"];
-
-    if (pass1.length < 8 && !(pass1 === pass2)) {
-      setResult("Passwords must be equal and at least 8 characters long");
-    } else {
-      let pass1Hash = crypto.createHash("sha256").update(pass1).digest("hex");
-      let pass2Hash = crypto.createHash("sha256").update(pass2).digest("hex");
-      state["password1"] = pass1Hash;
-      state["password2"] = pass2Hash;
-      setResult("Signing Up.....Please wait!");
-      let result = await api.post("/api/users/register", {}, { ...state });
-
-      if (result.data.status === "ok") {
-        setResult("Sign Up Successfull, Redirecting...");
-        setTimeout(() => {
-          setResult("");
-          document.location = "/";
-        }, 3000);
+    if (
+      state["email"] &&
+      state["password1"] &&
+      state["password2"] &&
+      state["name"] &&
+      state["dob"]
+    ) {
+      if (pass1.length < 8 && !(pass1 === pass2)) {
+        setResult("Passwords must be equal and at least 8 characters long");
       } else {
-        setResult(result.data.message);
-        setTimeout(() => {
-          setResult("");
-        }, 7000);
+        let pass1Hash = crypto.createHash("sha256").update(pass1).digest("hex");
+        let pass2Hash = crypto.createHash("sha256").update(pass2).digest("hex");
+        state["password1"] = pass1Hash;
+        state["password2"] = pass2Hash;
+        setResult("Signing Up.....Please wait!");
+        let result = await api.post("/api/users/register", {}, { ...state });
+
+        if (result.data.status === "ok") {
+          setResult("Sign Up Successfull, Redirecting...");
+          setTimeout(() => {
+            setResult("");
+            document.location = "/";
+          }, 3000);
+        } else {
+          setResult(result.data.message);
+          setTimeout(() => {
+            setResult("");
+          }, 7000);
+        }
       }
+    } else {
+      setResult("Please fill all required fields");
+      setTimeout(() => {
+        setResult("");
+      }, 7000);
     }
   };
   return (
@@ -44,7 +57,7 @@ const UserSignUp = (props) => {
       {result ? <ShowToast message={result} duration={5000} /> : null}
       <div className="mb-2">
         <label htmlFor="name" className="form-label">
-          Name
+          Name*
         </label>
         <input
           type="text"
@@ -59,7 +72,7 @@ const UserSignUp = (props) => {
 
       <div className="mb-3">
         <label htmlFor="email" className="form-label">
-          Email address
+          Email address*
         </label>
         <input
           type="email"
@@ -77,7 +90,7 @@ const UserSignUp = (props) => {
       </div>
       <div className="mb-2">
         <label htmlFor="dob" className="form-label">
-          Date Of Birth
+          Date Of Birth*
         </label>
         <input
           type="date"
@@ -91,7 +104,7 @@ const UserSignUp = (props) => {
       </div>
       <div className="mb-2">
         <label htmlFor="password1" className="form-label">
-          Password
+          Password*
         </label>
         <input
           type="password"
@@ -105,7 +118,7 @@ const UserSignUp = (props) => {
       </div>
       <div className="mb-2">
         <label htmlFor="password2" className="form-label">
-          Confirm Password
+          Confirm Password*
         </label>
         <input
           type="password"
