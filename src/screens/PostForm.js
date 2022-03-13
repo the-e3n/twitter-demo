@@ -52,7 +52,7 @@ function PostForm(props) {
         name="message"
         className="post-form-input"
         value={message}
-        placeholder="What are you thinking....."
+        placeholder="What's on your mind ?....."
         onChange={onChange}
       ></input>
       <button

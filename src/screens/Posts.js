@@ -4,6 +4,7 @@ import "./Posts.css";
 import api from "../api";
 import PostForm from "./PostForm";
 import AuthContext from "../context/auth-context";
+import { Link } from "react-router-dom";
 
 const Posts = (props) => {
   let following = document.location.pathname.includes("following");
@@ -48,9 +49,30 @@ const Posts = (props) => {
     );
   });
   return (
-    <div className="posts">
-      <PostForm update={reloadPosts}></PostForm>
-      {renderPosts.length ? renderPosts : <h1>No Posts Found</h1>}
+    <div className="posts-container">
+      <div className="posts">
+        <PostForm update={reloadPosts}></PostForm>
+        {renderPosts.length ? renderPosts : <h1>No Posts Found</h1>}
+      </div>
+      {following ? (
+        <div className="following-users">
+          <h1>People You Follow</h1>
+          {ctx.user.following.map((user) => {
+            if (!user.name) return null;
+            return (
+              <Link to={`/user/${user._id}`}>
+                <span
+                  style={{
+                    fontWeight: "bold",
+                  }}
+                >
+                  {user.name || "username"}
+                </span>
+              </Link>
+            );
+          })}
+        </div>
+      ) : null}
     </div>
   );
 };
